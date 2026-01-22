@@ -1,0 +1,6 @@
+{
+  "app.common.message.new-version-detect.title": "A new version is available.!",
+  "app.common.message.new-version-detect.content": "Please press \"reload\" to update the latest version.",
+  "app.common.message.new-version-detect.button-cancel": "Close",
+  "app.common.message.new-version-detect.button": "Reload"
+}

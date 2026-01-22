@@ -1,0 +1,6 @@
+{
+  "app.common.message.new-version-detect.title": "Đã có phiên bản mới!",
+  "app.common.message.new-version-detect.content": "Vui lòng nhấn \"Tải lại\" để cập nhật phiên bản mới nhất.",
+  "app.common.message.new-version-detect.button-cancel": "Đóng",
+  "app.common.message.new-version-detect.button": "Tải lại"
+}
