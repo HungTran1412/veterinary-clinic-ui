@@ -1,8 +1,25 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { CommonModule } from '@angular/common';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 @Component({
   selector: 'layout-pro-widget-notify',
+  standalone: true,
+  imports: [
+    CommonModule,
+    NzIconModule,
+    NzBadgeModule,
+    NzPopoverModule,
+    NzTabsModule,
+    NzListModule,
+    NzSpinModule
+  ],
   templateUrl: './notify.component.html',
   host: {
     '[class.alain-pro__header-item]': 'true'
@@ -19,13 +36,9 @@ export class LayoutProWidgetNotifyComponent implements OnInit {
 
   constructor(private msg: NzMessageService, private cdr: ChangeDetectorRef) {}
 
-  ngOnInit(): void {
-    // Logic lấy dữ liệu thông báo sẽ được thêm ở đây
-  }
+  ngOnInit(): void {}
 
-  loadData(): void {
-    // Tạm thời để trống
-  }
+  loadData(): void {}
 
   clear(type: string): void {
     this.msg.success(`Đã xóa hết ${type}`);

@@ -1,10 +1,24 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { isNullOrEmpty } from '@/app/utils'; // Sử dụng hàm từ utils của dự án
+import { isNullOrEmpty } from '@/app/utils';
+import { CommonModule } from '@angular/common';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { I18nPipe } from '../../i18n.pipe';
 
 @Component({
   selector: 'layout-pro-widget-user',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    NzDropDownModule,
+    NzAvatarModule,
+    NzIconModule,
+    I18nPipe
+  ],
   templateUrl: './user.component.html',
   host: {
     '[class.alain-pro__header-item]': 'true'
@@ -12,23 +26,17 @@ import { isNullOrEmpty } from '@/app/utils'; // Sử dụng hàm từ utils củ
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayoutProWidgetUserComponent implements OnInit {
-  avatar = 'assets/tmp/img/avatar.jpg'; // Ảnh mặc định
-  name = 'Admin'; // Tên mặc định
+  avatar = 'assets/tmp/img/avatar.jpg';
+  name = 'Admin';
 
   constructor(
     private router: Router,
     private msg: NzMessageService
   ) {}
 
-  ngOnInit(): void {
-    // Logic lấy thông tin user từ service hoặc localStorage sẽ được thêm vào đây
-    // Ví dụ:
-    // const user = JSON.parse(localStorage.getItem('user') || '{}');
-    // this.name = user.name || 'Admin';
-  }
+  ngOnInit(): void {}
 
   logout(): void {
-    // Logic logout đơn giản
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.msg.success('Đăng xuất thành công');

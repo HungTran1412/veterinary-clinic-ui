@@ -2,11 +2,20 @@ import { Direction, Directionality } from '@angular/cdk/bidi';
 import { ChangeDetectionStrategy, Component, HostListener, OnDestroy, OnInit, Optional } from '@angular/core';
 import { DrawerHelper } from '@delon/theme';
 import { Subject, takeUntil } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
 import { LayoutProWidgetQuickPanelComponent } from './quick-panel.component';
 
 @Component({
   selector: 'layout-pro-quick',
+  standalone: true,
+  imports: [
+    CommonModule,
+    NzIconModule,
+    NzDrawerModule
+  ],
   templateUrl: './quick.component.html',
   host: {
     '[class.alain-pro__header-item]': 'true'

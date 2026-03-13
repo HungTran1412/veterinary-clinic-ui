@@ -22,17 +22,11 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzListModule } from 'ng-zorro-antd/list';
-
-// Pipes
-import { I18nPipe } from './pro/i18n.pipe';
-
-// Components
-import { PRO_COMPONENTS } from './pro';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 @NgModule({
   declarations: [
-    ...PRO_COMPONENTS,
-    I18nPipe // Khai báo pipe ở đây
+    // I18nPipe đã là standalone
   ],
   imports: [
     CommonModule,
@@ -58,10 +52,11 @@ import { PRO_COMPONENTS } from './pro';
     NzAlertModule,
     NzBadgeModule,
     NzPopoverModule,
-    NzListModule
+    NzListModule,
+    NzMessageModule
   ],
   exports: [
-    ...PRO_COMPONENTS
+    // Tất cả các component đã là standalone
   ]
 })
 export class LayoutModule { }

@@ -1,12 +1,23 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Inject, OnDestroy, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { RTL, RTLService } from '@delon/theme';
 import { combineLatest, fromEvent, Subject, distinctUntilChanged, takeUntil, tap, throttleTime } from 'rxjs';
-
 import { BrandService } from '../../pro.service';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { LayoutProHeaderWidgetComponent } from '../widget/widget.component';
+import { LayoutProLogoComponent } from '../logo/logo.component';
 
 @Component({
   selector: 'layout-pro-header',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    NzIconModule,
+    LayoutProHeaderWidgetComponent,
+    LayoutProLogoComponent
+  ],
   templateUrl: './header.component.html',
   host: {
     '[class.ant-layout-header]': 'true',

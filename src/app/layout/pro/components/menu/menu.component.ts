@@ -6,14 +6,24 @@ import {
   OnDestroy,
   OnInit
 } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { Subject, filter, takeUntil } from 'rxjs';
 import { BrandService } from '../../pro.service';
 import { ProLayout } from '../../pro.types';
 import { MENU_ITEMS } from '@/app/utils';
+import { CommonModule } from '@angular/common';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'layout-pro-menu',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    NzMenuModule,
+    NzIconModule
+  ],
   templateUrl: './menu.component.html',
   host: {
     '[class.alain-pro__menu]': 'true',

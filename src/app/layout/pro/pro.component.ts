@@ -1,122 +1,144 @@
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { DOCUMENT } from '@angular/common';
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  Inject,
-  OnDestroy,
-  OnInit,
-  Renderer2,
-  ViewChild,
-  ViewContainerRef
-} from '@angular/core';
-import { NavigationEnd, NavigationError, RouteConfigLoadStart, Router } from '@angular/router';
-import { environment } from '@/app/environments/environments';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { Subject, takeUntil } from 'rxjs';
-
-import { BrandService } from './pro.service';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'layout-pro',
-  templateUrl: './pro.component.html',
-  styleUrls: ['./styles/index.less']
+  standalone: true,
+  imports: [CommonModule, RouterModule, NzLayoutModule, NzMenuModule, NzIconModule, NzButtonModule],
+  template: `
+    <nz-layout class="app-layout">
+      <nz-sider
+        nzCollapsible
+        [(nzCollapsed)]="collapsed"
+        [nzWidth]="sidebarWidth"
+        [nzCollapsedWidth]="collapsedWidth"
+        nzTheme="light"
+        class="app-sider"
+      >
+        <div class="logo">VC</div>
+        <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="collapsed">
+          <li nz-menu-item>
+            <a routerLink="/admin/pet">Thú cưng</a>
+          </li>
+          <li nz-menu-item>
+            <a routerLink="/admin">Dashboard</a>
+          </li>
+        </ul>
+        <div
+          class="sider-resize-handle"
+          (mousedown)="startResize($event)"
+          title="Kéo để thay đổi độ rộng"
+        ></div>
+      </nz-sider>
+      <nz-layout>
+        <nz-header class="header">
+          <button nz-button nzType="text" nzShape="circle" (click)="toggleCollapsed()">
+            <i nz-icon nzType="menu"></i>
+          </button>
+          <span class="header-title">Veterinary Clinic</span>
+        </nz-header>
+        <nz-content class="content">
+          <router-outlet></router-outlet>
+        </nz-content>
+      </nz-layout>
+    </nz-layout>
+  `,
+  styles: [
+    `
+      .app-layout {
+        height: 100vh;
+      }
+
+      .app-sider {
+        position: relative;
+        border-right: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      .logo {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 16px;
+      }
+
+      .header {
+        padding: 0 16px;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-title {
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .content {
+        margin: 24px;
+        padding: 24px;
+        background: #fff;
+        min-height: calc(100vh - 64px);
+      }
+
+      .sider-resize-handle {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 6px;
+        height: 100%;
+        cursor: ew-resize;
+        z-index: 10;
+      }
+    `
+  ]
 })
-export class LayoutProComponent implements OnInit, AfterViewInit, OnDestroy {
-  private destroy$ = new Subject<void>();
-  isFetching = false;
+export class LayoutProComponent {
+  collapsed = false;
+  sidebarWidth = 240;
+  collapsedWidth = 72;
 
-  get isMobile(): boolean {
-    return this.pro.isMobile;
+  private resizing = false;
+  private startX = 0;
+  private startWidth = 0;
+  private readonly minWidth = 180;
+  private readonly maxWidth = 340;
+
+  toggleCollapsed(): void {
+    this.collapsed = !this.collapsed;
   }
 
-  get getLayoutStyle(): { [key: string]: string } | null {
-    const { isMobile, fixSiderbar, collapsed, menu, width, widthInCollapsed } = this.pro;
-    if (fixSiderbar && menu !== 'top' && !isMobile) {
-      return {
-        paddingLeft: `${collapsed ? widthInCollapsed : width}px`
-      };
-    }
-    return null;
-  }
+  startResize(event: MouseEvent): void {
+    event.preventDefault();
+    this.resizing = true;
+    this.startX = event.clientX;
+    this.startWidth = this.sidebarWidth;
 
-  get getContentStyle(): { [key: string]: string } {
-    const { fixedHeader, headerHeight } = this.pro;
-    return {
-      margin: '24px 24px 0',
-      'padding-top': `${fixedHeader ? headerHeight : 0}px`
+    const move = (moveEvent: MouseEvent) => {
+      if (!this.resizing) {
+        return;
+      }
+      const delta = moveEvent.clientX - this.startX;
+      const next = this.startWidth + delta;
+      this.sidebarWidth = Math.max(this.minWidth, Math.min(this.maxWidth, next));
     };
-  }
 
-  constructor(
-    private router: Router,
-    private msg: NzMessageService,
-    private cdr: ChangeDetectorRef,
-    public pro: BrandService,
-    @Inject(DOCUMENT) private doc: any
-  ) {
-    // Scroll to top khi đổi route
-    this.router.events.pipe(takeUntil(this.destroy$)).subscribe(evt => {
-      if (!this.isFetching && evt instanceof RouteConfigLoadStart) {
-        this.isFetching = true;
-      }
-      if (evt instanceof NavigationError) {
-        this.isFetching = false;
-        this.msg.error(`Không thể tải trang ${evt.url}`, { nzDuration: 3000 });
-        return;
-      }
-      if (!(evt instanceof NavigationEnd)) {
-        return;
-      }
-      this.isFetching = false;
-      window.scrollTo(0, 0);
-    });
-  }
+    const up = () => {
+      this.resizing = false;
+      document.removeEventListener('mousemove', move);
+      document.removeEventListener('mouseup', up);
+    };
 
-  private setClass(): void {
-    const { body } = this.doc;
-    const { pro } = this;
-
-    const classesToRemove = [
-      'alain-pro',
-      'alain-pro__content-fluid', 'alain-pro__content-fixed',
-      'alain-pro__fixed',
-      'alain-pro__wide',
-      'alain-pro__dark', 'alain-pro__light',
-      'alain-pro__menu-side', 'alain-pro__menu-top',
-      'aside-collapsed'
-    ];
-    body.classList.remove(...classesToRemove);
-
-    body.classList.add('alain-pro');
-    body.classList.add(`alain-pro__content-${pro.layout.contentWidth}`);
-    if (pro.layout.fixedHeader) body.classList.add('alain-pro__fixed');
-    if (pro.isFixed) body.classList.add('alain-pro__wide');
-    body.classList.add(`alain-pro__${pro.theme}`);
-    if (pro.isSideMenu) body.classList.add('alain-pro__menu-side');
-    if (pro.isTopMenu) body.classList.add('alain-pro__menu-top');
-    if (pro.collapsed) body.classList.add('aside-collapsed');
-  }
-
-  ngAfterViewInit(): void {
-  }
-
-  ngOnInit(): void {
-    console.log('LayoutProComponent initialized');
-    this.pro.notify.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.setClass();
-    });
-
-    this.initPermissionOfUser();
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
-  initPermissionOfUser() {
-    console.log('LayoutPro: Init user permission (mock)');
+    document.addEventListener('mousemove', move);
+    document.addEventListener('mouseup', up);
   }
 }

@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LayoutModule as CdkLayoutModule } from '@angular/cdk/layout';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 import { routes } from './app.routes';
 
@@ -32,6 +34,8 @@ export const appConfig: ApplicationConfig = {
           deps: [HttpClient]
         }
       })
-    )
+    ),
+    importProvidersFrom(CdkLayoutModule),
+    importProvidersFrom(NzMessageModule) // Cung cấp service message toàn cục
   ]
 };

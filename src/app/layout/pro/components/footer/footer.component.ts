@@ -1,8 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { environment } from '../../../../environments/environments';
+import { CommonModule } from '@angular/common';
+import { I18nPipe } from '../../i18n.pipe';
 
 @Component({
   selector: 'layout-pro-footer',
+  standalone: true,
+  imports: [CommonModule, I18nPipe],
   templateUrl: './footer.component.html',
   host: {
     '[class.alain-pro__footer]': 'true'
@@ -17,7 +21,6 @@ export class LayoutProFooterComponent {
     return environment.version;
   }
   get build(): number {
-    // Chuyển đổi sang số để tránh lỗi phép toán trong template
     return +environment.build || 0;
   }
 }

@@ -3,8 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./routes/admin/admin.module').then(m => m.AdminModule),
+    loadChildren: () => import('./layout/layout-routing.module').then(m => m.LayoutRoutingModule)
   },
-  // Fallback route
   { path: '**', redirectTo: '' }
 ];
