@@ -53,7 +53,7 @@ export class PetTestComponent implements OnInit {
         } else {
           this.listOfData = [];
           if (res && res.message) {
-             this.msg.warning(res.message);
+            this.msg.warning(res.message);
           }
         }
       },
@@ -63,11 +63,11 @@ export class PetTestComponent implements OnInit {
 
         let msg = 'Có lỗi xảy ra khi gọi API';
         if (err.status === 0) {
-            msg = 'Lỗi kết nối (Status 0). Vui lòng kiểm tra: Server đã bật chưa? CORS? SSL?';
+          msg = 'Lỗi kết nối (Status 0). Vui lòng kiểm tra: Server đã bật chưa? CORS? SSL?';
         } else if (err.status === 404) {
-            msg = `Không tìm thấy API (404): ${err.url}`;
+          msg = `Không tìm thấy API (404): ${err.url}`;
         } else {
-            msg = `Lỗi ${err.status}: ${err.statusText || err.message}`;
+          msg = `Lỗi ${err.status}: ${err.statusText || err.message}`;
         }
         this.msg.error(msg);
       }

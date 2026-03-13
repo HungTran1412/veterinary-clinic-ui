@@ -33,6 +33,7 @@
     "@angular/router": "^18.2.0",
     "@auth0/angular-jwt": "^5.2.0",
     "@ctrl/tinycolor": "^3.6.1",
+    "@delon/theme": "^21.0.5",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
     "ag-grid-angular": "^32.0.0",
@@ -48,6 +49,8 @@
     "@angular/cli": "^18.2.0",
     "@angular/compiler-cli": "^18.2.0",
     "jsdom": "^24.0.0",
+    "less": "^4.6.3",
+    "less-loader": "^12.3.2",
     "typescript": "~5.5.0",
     "vitest": "^1.6.0"
   }

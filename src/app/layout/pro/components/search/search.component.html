@@ -1,0 +1,11 @@
+<nz-input-group [nzSuffix]="suffixIconSearch">
+  <input type="text" nz-input placeholder="Search..." [(ngModel)]="q" (input)="onSearch($event)" [nzAutocomplete]="searchAuto" />
+</nz-input-group>
+<ng-template #suffixIconSearch>
+  <i nz-icon nzType="search"></i>
+</ng-template>
+<nz-autocomplete #searchAuto>
+  <nz-auto-option *ngFor="let item of list" [nzValue]="item.no">
+    {{ item.no }}
+  </nz-auto-option>
+</nz-autocomplete>
