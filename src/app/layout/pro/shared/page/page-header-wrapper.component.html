@@ -1,0 +1,11 @@
+<div class="alain-pro__page-header" [ngClass]="{'alain-pro__page-header-wide': pro.isFixed}">
+  <div class="alain-pro__page-header-title" *ngIf="title">
+    {{ title }}
+  </div>
+  <div class="alain-pro__page-header-content" *ngIf="content">
+    <ng-template [ngTemplateOutlet]="content"></ng-template>
+  </div>
+</div>
+<div class="alain-pro__page-header-content">
+  <ng-content></ng-content>
+</div>

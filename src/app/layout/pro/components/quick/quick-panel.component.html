@@ -1,0 +1,30 @@
+<div class="ant-drawer-header">
+  <div class="ant-drawer-title">Quick Settings</div>
+</div>
+<div class="ant-drawer-body">
+  <div class="p-md">
+    <div class="mb-md">
+      <h3 class="mb-sm">Layout</h3>
+      <div class="d-flex justify-content-between align-items-center mb-sm">
+        <span>Color Weak Mode</span>
+        <nz-switch [(ngModel)]="pro.layout.colorWeak" (ngModelChange)="setLayout('colorWeak', $event)"></nz-switch>
+      </div>
+    </div>
+
+    <div class="mb-md">
+      <h3 class="mb-sm">Notifications</h3>
+      <div class="d-flex justify-content-between align-items-center mb-sm">
+        <span>New Customer</span>
+        <nz-switch [(ngModel)]="data.settings.new_customer" (ngModelChange)="updateSetting('new_customer', $event)"></nz-switch>
+      </div>
+      <div class="d-flex justify-content-between align-items-center mb-sm">
+        <span>Reporting Customer</span>
+        <nz-switch [(ngModel)]="data.settings.reporting_customer" (ngModelChange)="updateSetting('reporting_customer', $event)"></nz-switch>
+      </div>
+    </div>
+
+    <div>
+      <button nz-button nzType="primary" nzDanger nzBlock (click)="clear()">Clear Cache</button>
+    </div>
+  </div>
+</div>
