@@ -1,36 +1,15 @@
-<div style="background: red; color: white; padding: 10px; z-index: 9999; position: fixed; top: 0; left: 0;">
-  DEBUG: Admin Layout Loaded
-</div>
-<nz-layout class="alain-pro__layout" style="min-height: 100vh;">
-  <nz-sider
-    *ngIf="pro.isSideMenu"
-    [nzWidth]="pro.width"
-    [nzCollapsedWidth]="pro.widthInCollapsed"
-    [nzCollapsible]="true"
-    [(nzCollapsed)]="pro.layout.collapsed"
-    [nzTrigger]="null"
-    class="alain-pro__sider"
-  >
+<nz-layout class="alain-pro__layout">
+  <nz-sider *ngIf="pro.isSideMenu" class="alain-pro__sider" [nzCollapsible]="true" [nzTrigger]="null" [nzWidth]="pro.width" [nzCollapsedWidth]="pro.widthInCollapsed" [(nzCollapsed)]="pro.layout.collapsed">
     <layout-pro-logo></layout-pro-logo>
-    <layout-pro-menu></layout-pro-menu>
+    <layout-pro-menu [mode]="'inline'"></layout-pro-menu>
   </nz-sider>
-  <nz-layout class="alain-pro__layout-content">
+  <nz-layout class="alain-pro__layout-content" [ngStyle]="getLayoutStyle">
     <layout-pro-header></layout-pro-header>
-    <nz-content [ngStyle]="getContentStyle" style="min-height: 200px; padding: 24px;">
-      <div style="border: 2px solid green; padding: 10px;">
-        DEBUG: Router Outlet Container
-        <router-outlet></router-outlet>
-      </div>
+    <nz-content class="alain-pro__content" [ngStyle]="getContentStyle">
+      <router-outlet></router-outlet>
     </nz-content>
     <layout-pro-footer></layout-pro-footer>
   </nz-layout>
 </nz-layout>
 
-<!--
-<div *ngIf="isFetching" class="alain-pro__fetching">
-  <nz-spin class="alain-pro__fetching-icon" nzSpinning></nz-spin>
-</div>
--->
-
 <pro-setting-drawer></pro-setting-drawer>
-<layout-pro-widget-quick-panel></layout-pro-widget-quick-panel>

@@ -86,8 +86,6 @@ export class BrandService {
       colorWeak: false
     };
 
-    // Sử dụng 'as any' cho environment.pro để tránh lỗi type mismatch (string vs literal type)
-    // Và spread object để tránh lỗi duplicate property declaration
     this._layout = {
       ...defaultLayout,
       ...(environment.pro as any)

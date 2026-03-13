@@ -1,17 +1,36 @@
 import { Direction, Directionality } from '@angular/cdk/bidi';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, NgZone, OnDestroy, OnInit, Optional } from '@angular/core';
 import { I18NService } from '@/app/shared-ui/core/i18n/i18n.service';
-// import { ALAIN_I18N_TOKEN } from '@delon/theme'; // Bỏ
-// import { copy, LazyService } from '@delon/util'; // Bỏ
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject, takeUntil } from 'rxjs';
-
 import { BrandService } from '../pro.service';
-import { ProLayout, ProLayoutTheme, ProLayoutMenu, ProLayoutContentWidth } from '../pro.types'; // Import đúng type
+import { ProLayout, ProLayoutTheme, ProLayoutMenu, ProLayoutContentWidth } from '../pro.types';
+import { FormsModule } from '@angular/forms';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { I18nPipe } from '../i18n.pipe';
 
 @Component({
   selector: 'pro-setting-drawer',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    NzDrawerModule,
+    NzIconModule,
+    NzSwitchModule,
+    NzSelectModule,
+    NzToolTipModule,
+    NzDividerModule,
+    NzAlertModule,
+    I18nPipe
+  ],
   templateUrl: './setting-drawer.component.html',
   preserveWhitespaces: false,
   host: {
@@ -87,11 +106,9 @@ export class ProSettingDrawerComponent implements OnInit, OnDestroy {
     private msg: NzMessageService,
     private zone: NgZone,
     @Inject(DOCUMENT) private doc: any,
-    private i18n: I18NService, // Inject trực tiếp service
+    private i18n: I18NService,
     @Optional() private directionality: Directionality
-  ) {
-    // Không gọi setLayout trong constructor để tránh lỗi
-  }
+  ) {}
 
   ngOnInit(): void {
     if (this.directionality) {
@@ -118,14 +135,10 @@ export class ProSettingDrawerComponent implements OnInit, OnDestroy {
   }
 
   setLayout(name: keyof ProLayout, value: any): void {
-    // Logic xử lý ràng buộc layout
     if (name === 'menu') {
         const isTop = value === 'top';
-        // Cập nhật disabled cho content width
         const fixedOption = this.contentWidths.find(w => w.key === 'fixed');
         if (fixedOption) fixedOption.disabled = !isTop;
-
-        // Cập nhật các thuộc tính liên quan
         this.brand.setLayout('contentWidth', isTop ? 'fixed' : 'fluid');
         this.brand.setLayout('onlyIcon', isTop);
         if (isTop && !this.brand.isMobile) {
@@ -139,7 +152,6 @@ export class ProSettingDrawerComponent implements OnInit, OnDestroy {
 
     this.brand.setLayout(name, value);
 
-    // Trigger resize để các component khác (như chart) render lại
     setTimeout(() => {
         window.dispatchEvent(new Event('resize'));
         this.cdr.markForCheck();

@@ -10,4 +10,8 @@ import { RouterOutlet } from '@angular/router';
 })
 export class App {
   protected readonly title = signal('veterinary-clinic-ui');
+
+  constructor() {
+    console.log('App component constructor');
+  }
 }

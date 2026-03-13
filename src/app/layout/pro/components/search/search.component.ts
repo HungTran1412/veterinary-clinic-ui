@@ -1,9 +1,22 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, ViewChild } from '@angular/core';
 import { _HttpClient } from '@delon/theme';
 import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 @Component({
   selector: 'layout-pro-search',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    NzIconModule,
+    NzAutocompleteModule,
+    NzInputModule
+  ],
   templateUrl: 'search.component.html',
   host: {
     '[class.alain-pro__header-item]': 'true',

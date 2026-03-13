@@ -10,9 +10,24 @@ import {
   ViewChild
 } from '@angular/core';
 import { Subject } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { LayoutProWidgetQuickChatStatusComponent } from './quick-chat-status.component';
 
 @Component({
   selector: 'layout-pro-widget-quick-chat',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    NzDropDownModule,
+    NzIconModule,
+    NzBadgeModule,
+    LayoutProWidgetQuickChatStatusComponent
+  ],
   templateUrl: './quick-chat.component.html',
   host: {
     '[class.alain-pro__header-item]': 'true',
@@ -72,15 +87,7 @@ export class LayoutProWidgetQuickChatComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('click')
-  _click(): void {
-    // Chỉ toggle khi click vào icon chat, nhưng HostListener này bắt click trên toàn bộ component
-    // Trong template, click vào title mới gọi toggleCollapsed.
-    // Logic này có vẻ để handle việc click outside để đóng chat?
-    // Nhưng show được set bằng click vào icon chat trên header (nằm ngoài component này nếu component này là popup).
-    // Nhưng layout-pro-widget-quick-chat nằm trong header.
-    // Logic của show/hide này có vẻ hơi phức tạp nếu không có context đầy đủ.
-    // Tạm thời giữ nguyên.
-  }
+  _click(): void {}
 
   ngOnDestroy(): void {
     this.destroy$.next();
