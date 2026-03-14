@@ -9,11 +9,11 @@ import {
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { Subject, filter, takeUntil } from 'rxjs';
 import { BrandService } from '../../pro.service';
-import { ProLayout } from '../../pro.types';
-import { MENU_ITEMS } from '@/app/utils';
+import { MenuItem, MENU_ITEMS } from '@/app/utils';
 import { CommonModule } from '@angular/common';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { I18nPipe } from '../../i18n.pipe';
 
 @Component({
   selector: 'layout-pro-menu',
@@ -22,7 +22,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     CommonModule,
     RouterModule,
     NzMenuModule,
-    NzIconModule
+    NzIconModule,
+    I18nPipe
   ],
   templateUrl: './menu.component.html',
   host: {
@@ -34,7 +35,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 export class LayoutProMenuComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
-  menus: any[] = MENU_ITEMS;
+  menus: MenuItem[] = MENU_ITEMS;
 
   @Input() disabledAcl = false;
   @Input() mode: 'vertical' | 'horizontal' | 'inline' = 'inline';
@@ -56,13 +57,17 @@ export class LayoutProMenuComponent implements OnInit, OnDestroy {
   }
 
   closeCollapsed(): void {
-    this.pro.setCollapsed(true);
+    if (this.pro.isMobile) {
+      this.pro.setCollapsed(true);
+    }
   }
 
-  openChange(item: any, status: boolean): void {
+  openChange(item: MenuItem, status: boolean): void {
     if (status) {
       this.menus.forEach(p => {
-        if (p !== item && p.open) p.open = false;
+        if (p !== item) {
+          // p.open = false;
+        }
       });
     }
   }

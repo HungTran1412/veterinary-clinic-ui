@@ -1,1 +1,17 @@
-<router-outlet />
+<router-outlet></router-outlet>
+
+<div *ngIf="runtimeError" style="position: fixed; bottom: 10px; left: 10px; right: 10px; background: rgba(255,0,0,0.15); padding: 12px; border: 1px solid rgba(255,0,0,0.5); border-radius: 6px; z-index: 9999; font-size: 12px;">
+  <div><strong>Runtime error detected:</strong></div>
+  <div>{{ runtimeError?.message }}</div>
+  <div style="font-size: 11px;">at {{ runtimeError?.source }}:{{ runtimeError?.line }}:{{ runtimeError?.column }}</div>
+  <div style="font-size: 11px; color: rgba(0,0,0,0.7)">stack: {{ runtimeError?.error }}</div>
+</div>
+
+<div *ngIf="navigationError" style="position: fixed; bottom: 120px; left: 10px; right: 10px; background: rgba(255,196,0,0.15); padding: 12px; border: 1px solid rgba(255,196,0,0.5); border-radius: 6px; z-index: 9999; font-size: 12px;">
+  <div><strong>Navigation error detected:</strong></div>
+  <div>{{ navigationError }}</div>
+</div>
+
+<div style="position: fixed; bottom: 10px; right: 10px; background: rgba(0,0,0,0.6); color: #fff; padding: 8px 10px; border-radius: 6px; z-index: 9999; font-size: 12px;">
+  Route: {{ router.url }}
+</div>
