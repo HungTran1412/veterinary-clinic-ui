@@ -1,8 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { PetApiService } from '@/app/services/pet-api.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { PetItemComponent } from '../pet-test-item/pet-test-item.component';
 import { ColDef } from 'ag-grid-community';
+import { AgGridAngular } from 'ag-grid-angular';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-pet-test',

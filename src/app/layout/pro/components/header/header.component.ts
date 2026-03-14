@@ -7,6 +7,7 @@ import { BrandService } from '../../pro.service';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { LayoutProHeaderWidgetComponent } from '../widget/widget.component';
 import { LayoutProLogoComponent } from '../logo/logo.component';
+import { LayoutProMenuComponent } from '../menu/menu.component';
 
 @Component({
   selector: 'layout-pro-header',
@@ -16,7 +17,8 @@ import { LayoutProLogoComponent } from '../logo/logo.component';
     RouterModule,
     NzIconModule,
     LayoutProHeaderWidgetComponent,
-    LayoutProLogoComponent
+    LayoutProLogoComponent,
+    LayoutProMenuComponent
   ],
   templateUrl: './header.component.html',
   host: {
@@ -45,7 +47,7 @@ export class LayoutProHeaderComponent implements OnInit, OnDestroy {
     if (this.rtl.dir === RTL) {
       type = this.pro.collapsed ? 'fold' : 'unfold';
     }
-    return `menu-${type}`;
+    return type; // Xóa tiền tố 'menu-'
   }
 
   constructor(public pro: BrandService, @Inject(DOCUMENT) private doc: any, private cdr: ChangeDetectorRef, private rtl: RTLService) {}

@@ -91,6 +91,9 @@ export class BrandService {
       ...(environment.pro as any)
     };
 
+    // Always show menu labels by default (not icon-only) unless explicitly overridden.
+    this._layout.onlyIcon = false;
+
     const mobileMedia = 'only screen and (max-width: 767.99px)';
     bm.observe(mobileMedia).subscribe(state => this.checkMedia(state.matches));
     this.checkMedia(bm.isMatched(mobileMedia));

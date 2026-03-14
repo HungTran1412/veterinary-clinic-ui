@@ -10,8 +10,13 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LayoutModule as CdkLayoutModule } from '@angular/cdk/layout';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { icons } from './icons';
 
 import { routes } from './app.routes';
+import { I18NService } from './shared-ui/core/i18n/i18n.service'; // THÊM
 
 registerLocaleData(en);
 
@@ -35,7 +40,14 @@ export const appConfig: ApplicationConfig = {
         }
       })
     ),
+    // Cung cấp các service của NG-ZORRO
     importProvidersFrom(CdkLayoutModule),
-    importProvidersFrom(NzMessageModule) // Cung cấp service message toàn cục
+    importProvidersFrom(NzMessageModule),
+    importProvidersFrom(NzNotificationModule),
+    importProvidersFrom(NzModalModule),
+    importProvidersFrom(NzIconModule.forRoot(icons)),
+
+    // Cung cấp service I18N một cách tường minh
+    I18NService
   ]
 };

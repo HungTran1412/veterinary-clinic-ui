@@ -5,11 +5,20 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { LayoutProMenuComponent } from './components/menu/menu.component';
 
 @Component({
   selector: 'layout-pro',
   standalone: true,
-  imports: [CommonModule, RouterModule, NzLayoutModule, NzMenuModule, NzIconModule, NzButtonModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    NzLayoutModule,
+    NzMenuModule,
+    NzIconModule,
+    NzButtonModule,
+    LayoutProMenuComponent
+  ],
   template: `
     <nz-layout class="app-layout">
       <nz-sider
@@ -21,14 +30,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
         class="app-sider"
       >
         <div class="logo">VC</div>
-        <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="collapsed">
-          <li nz-menu-item>
-            <a routerLink="/admin/pet">Thú cưng</a>
-          </li>
-          <li nz-menu-item>
-            <a routerLink="/admin">Dashboard</a>
-          </li>
-        </ul>
+        <layout-pro-menu [mode]="'inline'"></layout-pro-menu>
         <div
           class="sider-resize-handle"
           (mousedown)="startResize($event)"
@@ -106,6 +108,10 @@ export class LayoutProComponent {
   collapsed = false;
   sidebarWidth = 240;
   collapsedWidth = 72;
+
+  constructor() {
+    console.log('[LayoutProComponent] initialized');
+  }
 
   private resizing = false;
   private startX = 0;

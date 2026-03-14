@@ -9,13 +9,20 @@ import { MENU_ITEMS } from '@/app/utils';
 export const startPageGuard: CanActivateFn = (_, state): boolean | Observable<boolean> => {
   const router = inject(Router);
 
+  const normalize = (url: string): string => {
+    const clean = url.split('?')[0].split('#')[0];
+    return clean.endsWith('/') && clean !== '/' ? clean.slice(0, -1) : clean;
+  };
+
+  const normalizedUrl = normalize(state.url);
+
   // Logic đơn giản: Nếu URL tồn tại trong danh sách menu thì cho phép truy cập
   // Bạn có thể mở rộng logic này để kiểm tra quyền (ACL) nếu cần
 
   // Hàm đệ quy để tìm menu item theo URL
   const findMenuItem = (items: any[], url: string): any => {
     for (const item of items) {
-      if (item.link === url) return item;
+      if (normalize(item.link ?? '') === url) return item;
       if (item.children) {
         const found = findMenuItem(item.children, url);
         if (found) return found;
@@ -24,11 +31,13 @@ export const startPageGuard: CanActivateFn = (_, state): boolean | Observable<bo
     return null;
   };
 
-  const menu = findMenuItem(MENU_ITEMS, state.url);
+  const menu = findMenuItem(MENU_ITEMS, normalizedUrl);
 
   if (!menu) {
     // Nếu không tìm thấy menu tương ứng với URL, chuyển về trang chủ
-    router.navigateByUrl('/dashboard');
+    if (normalizedUrl !== '/dashboard') {
+      router.navigateByUrl('/dashboard');
+    }
     return false;
   }
 

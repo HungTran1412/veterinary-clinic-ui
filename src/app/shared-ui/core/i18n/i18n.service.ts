@@ -38,7 +38,7 @@ const LANGS: { [key: string]: LangConfigData } = {
   }
 };
 
-@Injectable({ providedIn: 'root' })
+@Injectable() // Xóa providedIn: 'root'
 export class I18NService {
   private _defaultLang = DEFAULT;
   private _currentLang = DEFAULT;
@@ -68,10 +68,6 @@ export class I18NService {
     if (!this.platform.isBrowser) {
       return DEFAULT;
     }
-    // Bạn có thể thêm logic lấy ngôn ngữ từ localStorage ở đây nếu muốn
-    // const savedLang = localStorage.getItem('lang');
-    // if (savedLang) return savedLang;
-
     return DEFAULT;
   }
 
@@ -83,7 +79,6 @@ export class I18NService {
     this.nzI18nService.setLocale(item.zorro);
     this.nzI18nService.setDateLocale(item.date);
 
-    // Sử dụng ngx-translate để đổi ngôn ngữ
     this.translate.use(lang);
 
     this._currentLang = lang;
