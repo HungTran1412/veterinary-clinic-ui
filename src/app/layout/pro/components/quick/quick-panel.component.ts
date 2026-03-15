@@ -3,26 +3,9 @@ import { NzDrawerRef } from 'ng-zorro-antd/drawer';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { BrandService } from '../../pro.service';
 import { ProLayout } from '../../pro.types';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzSwitchModule } from 'ng-zorro-antd/switch';
-import { NzListModule } from 'ng-zorro-antd/list';
-import { NzAvatarModule } from 'ng-zorro-antd/avatar';
-import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'layout-pro-widget-quick-panel',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    NzIconModule,
-    NzSwitchModule,
-    NzListModule,
-    NzAvatarModule,
-    NzButtonModule
-  ],
   templateUrl: './quick-panel.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

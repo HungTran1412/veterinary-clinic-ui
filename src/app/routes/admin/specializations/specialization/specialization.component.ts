@@ -11,7 +11,6 @@ import {
   QUERY_FILTER_DEFAULT,
 } from '@/app/utils';
 import { ColDef } from 'ag-grid-community';
-import { AgGridAngular } from 'ag-grid-angular';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
@@ -19,6 +18,7 @@ import { Subscription } from 'rxjs';
 
 import { SpecializationApiService } from '@/app/services/specialization-api.service';
 import { SpecializationItemComponent } from '../specialization-item/specialization-item.component';
+import { BtnCellRenderComponent } from '@/app/shared/ag-grid/cell-render/btn-cell-render/btn-cell-render.component';
 
 @Component({
   selector: 'app-specialization',
@@ -68,9 +68,20 @@ export class SpecializationComponent implements OnInit {
       { field: 'code', headerName: 'Mã', minWidth: 120, flex: 1 },
       { field: 'name', headerName: 'Tên', minWidth: 150, flex: 1 },
       { field: 'description', headerName: 'Mô tả', minWidth: 200, flex: 1 },
+      {
+        headerName: 'Thao tác',
+        minWidth: 120,
+        cellRenderer: 'btnCellRender',
+        cellRendererParams: {
+          infoClicked: (item: any) => this.onViewItem(item),
+          editClicked: (item: any) => this.onEditItem(item),
+          deleteClicked: (item: any) => this.onDeleteItem(item),
+        },
+      },
     ];
 
     this.defaultColDef = { minWidth: 100, resizable: true, sortable: true };
+    this.frameworkComponents = { btnCellRender: BtnCellRenderComponent };
 
     this.form = this.fb.group({ textSearch: [null] });
 
@@ -189,6 +200,9 @@ export class SpecializationComponent implements OnInit {
 
           for (const item of dataResult.data) {
             item.index = ++i;
+            item.infoGrantAccess = true;
+            item.editGrantAccess = true;
+            item.deleteGrantAccess = true;
           }
 
           this.grid.totalData = dataResult.totalCount;

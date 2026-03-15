@@ -1,0 +1,20 @@
+<div class="custom-ag-tag">
+  <nz-tag [nzColor]="'#16610E'" *ngIf="params.data.processId">{{ params.value }}</nz-tag>
+  <nz-tag [nzColor]="'#FED16A'" *ngIf="!params.data.processId">{{ params.value }}</nz-tag>
+  <nz-tag nzColor="success" *ngIf="params.data.isFinalState">
+    <span nz-icon nzType="check-circle"></span>
+    Đã hoàn thành quy trình
+  </nz-tag>
+  <!-- Container chứa các nút -->
+  <!-- <button
+    *ngFor="let item of params.data.commands"
+    nz-button
+    nzType="primary"
+    nzSize="small"
+    class="btn-secondary"
+    (click)="onProccessWorkflowClick(item.key)"
+    [title]="item.value"
+  >
+    {{ item.value }}
+  </button> -->
+</div>
