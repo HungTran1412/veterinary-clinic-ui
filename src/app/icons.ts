@@ -4,7 +4,21 @@ import {
   PieChartOutline,
   ExperimentOutline,
   SettingOutline,
-  MenuOutline
+  MenuOutline,
+  PlusOutline,
+  SearchOutline,
+  FileAddOutline,
+  EditOutline,
+  EditFill,
+  SaveOutline,
+  CloseCircleOutline,
+  MenuFoldOutline,
+  MenuUnfoldOutline,
+  BellOutline,
+  CopyrightOutline,
+  EllipsisOutline,
+  CloseOutline,
+  CheckOutline
 } from '@ant-design/icons-angular/icons';
 
 export const icons: IconDefinition[] = [
@@ -12,5 +26,19 @@ export const icons: IconDefinition[] = [
   PieChartOutline,
   ExperimentOutline,
   SettingOutline,
-  MenuOutline
+  MenuOutline,
+  PlusOutline,
+  SearchOutline,
+  FileAddOutline,
+  EditOutline,
+  EditFill,
+  SaveOutline,
+  CloseCircleOutline,
+  MenuFoldOutline,
+  MenuUnfoldOutline,
+  BellOutline,
+  CopyrightOutline,
+  EllipsisOutline,
+  CloseOutline,
+  CheckOutline
 ];

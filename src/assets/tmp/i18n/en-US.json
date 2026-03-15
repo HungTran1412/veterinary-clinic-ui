@@ -1,0 +1,31 @@
+{
+  "app.common.message.new-version-detect.title": "A new version is available!",
+  "app.common.message.new-version-detect.content": "Please press \"reload\" to update to the latest version.",
+  "app.common.message.new-version-detect.button-cancel": "Close",
+  "app.common.message.new-version-detect.button": "Reload",
+
+  "app.common.button.search": "Search",
+  "app.common.button.reset": "Reset",
+  "app.common.specialization.placeholder.search": "Enter keyword",
+  "search.model.button": "Search",
+
+  "menu.category": "Category",
+  "menu.specialization": "Specialization",
+
+  "function.specialization.modal.title-info": "Specialization information",
+  "function.specialization.modal.form.code": "Code",
+  "function.specialization.modal.form.code.required": "Please enter the code",
+  "function.specialization.modal.form.code.placeholder": "Enter code",
+  "function.specialization.modal.form.name": "Name",
+  "function.specialization.modal.form.name.required": "Please enter the name",
+  "function.specialization.modal.form.name.placeholder": "Enter name",
+  "function.specialization.modal.form.description": "Description",
+  "function.specialization.modal.form.description.placeholder": "Enter description",
+
+  "app.common.button.edit": "Edit",
+  "app.common.button.close": "Close",
+
+  "footer-copyright": "Copyright",
+  "footer-url": "https://example.com",
+  "footer-name": "Veterinary Clinic"
+}

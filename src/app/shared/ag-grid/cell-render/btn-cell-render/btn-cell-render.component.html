@@ -1,0 +1,100 @@
+<style>
+  .btn-history {
+    background-color: #1890ff;
+    border-color: #1890ff;
+  }
+
+  .btn-success {
+    background-color: #52c41a;
+    border-color: #52c41a;
+    color: #fff !important;
+  }
+
+  .btn-success:hover,
+  .btn-success:focus {
+    background-color: #73d13d;
+    border-color: #73d13d;
+    color: #fff !important;
+  }
+</style>
+
+<!-- Hiển thị các button trực tiếp -->
+<ng-container *ngFor="let btn of directButtons">
+  <button
+    nz-button
+    [nzType]="btn.type === 'default' ? 'default' : 'primary'"
+    [nzDanger]="btn.type === 'danger'"
+    nzShape="circle"
+    [class]="btn.class"
+    (click)="btn.handler($event)"
+    [title]="btn.title"
+  >
+    <i nz-icon [nzType]="btn.icon" nzTheme="outline"></i>
+  </button>
+</ng-container>
+
+<!-- Button xử lý workflow với popover -->
+<button
+  nz-button
+  nzType="primary"
+  *ngIf="params.data.processWorkflowGrantAccess"
+  nzShape="circle"
+  class="btn-history"
+  (click)="onShowPopover()"
+  title="Xử lý quy trình"
+  nz-popover
+  [nzPopoverTitle]="titleTemplate"
+  [(nzPopoverVisible)]="visibleProcess"
+  nzPopoverTrigger="click"
+  [nzPopoverContent]="contentTemplate"
+>
+  <i nz-icon nzType="select" nzTheme="outline"></i>
+</button>
+<ng-template #contentTemplate>
+  <button
+    *ngFor="let item of params.data.commands"
+    nz-button
+    nzType="primary"
+    nzSize="small"
+    class="button-info"
+    (click)="btnProcessWorkflowClickedHandler(item.key)"
+    [title]="item.value"
+  >
+    {{ item.value }}
+  </button>
+</ng-template>
+<ng-template #titleTemplate>
+  Xử lý quy trình
+  <button
+    nz-button
+    nzType="text"
+    class="btn-close"
+    (click)="visibleProcess = false"
+    style="float: right; margin-top: -5px; margin-right: -5px"
+  >
+    <span nz-icon nzType="close"></span>
+  </button>
+</ng-template>
+
+<!-- Dropdown menu cho các button còn lại (nếu có) -->
+<button
+  *ngIf="dropdownButtons.length > 0"
+  nz-button
+  nzType="default"
+  nzShape="circle"
+  nz-dropdown
+  [nzDropdownMenu]="menu"
+  nzPlacement="bottomRight"
+  title="Thêm tùy chọn"
+>
+  <i nz-icon nzType="more" nzTheme="outline"></i>
+</button>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu>
+    <li nz-menu-item *ngFor="let btn of dropdownButtons" (click)="btn.handler($event)">
+      <i nz-icon [nzType]="btn.icon" nzTheme="outline"></i>
+      <span style="margin-left: 8px">{{ btn.title }}</span>
+    </li>
+  </ul>
+</nz-dropdown-menu>

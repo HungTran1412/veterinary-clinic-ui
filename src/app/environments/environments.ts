@@ -11,7 +11,7 @@ export const environment = {
   phanHe: 'VeterinaryClinic',
   authType: 'jwt', // Đã chuyển sang JWT
   api: {
-    baseUrl: 'http://localhost:5278',
+    baseUrl: 'https://localhost:44360',
     refreshTokenEnabled: true,
     refreshTokenType: 'auth-refresh'
   },

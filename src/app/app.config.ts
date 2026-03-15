@@ -16,7 +16,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { icons } from './icons';
 
 import { routes } from './app.routes';
-import { I18NService } from './shared-ui/core/i18n/i18n.service'; // THÊM
+import { LayoutModule } from './layout/layout.module';
 
 registerLocaleData(en);
 
@@ -40,14 +40,11 @@ export const appConfig: ApplicationConfig = {
         }
       })
     ),
-    // Cung cấp các service của NG-ZORRO
     importProvidersFrom(CdkLayoutModule),
     importProvidersFrom(NzMessageModule),
     importProvidersFrom(NzNotificationModule),
     importProvidersFrom(NzModalModule),
     importProvidersFrom(NzIconModule.forRoot(icons)),
-
-    // Cung cấp service I18N một cách tường minh
-    I18NService
+    importProvidersFrom(LayoutModule)
   ]
 };

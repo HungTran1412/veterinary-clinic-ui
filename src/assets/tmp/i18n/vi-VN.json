@@ -1,0 +1,31 @@
+{
+  "app.common.message.new-version-detect.title": "Đã có phiên bản mới!",
+  "app.common.message.new-version-detect.content": "Vui lòng nhấn \"Tải lại\" để cập nhật phiên bản mới nhất.",
+  "app.common.message.new-version-detect.button-cancel": "Đóng",
+  "app.common.message.new-version-detect.button": "Tải lại",
+
+  "app.common.button.search": "Tìm kiếm",
+  "app.common.button.reset": "Làm mới",
+  "app.common.specialization.placeholder.search": "Nhập từ khóa",
+  "search.model.button": "Tìm kiếm",
+
+  "menu.category": "Danh mục",
+  "menu.specialization": "Quản lý chuyên ngành",
+
+  "function.specialization.modal.title-info": "Thông tin chuyên ngành",
+  "function.specialization.modal.form.code": "Mã chuyên ngành",
+  "function.specialization.modal.form.code.required": "Vui lòng nhập mã chuyên ngành",
+  "function.specialization.modal.form.code.placeholder": "Nhập mã chuyên ngành",
+  "function.specialization.modal.form.name": "Tên chuyên ngành",
+  "function.specialization.modal.form.name.required": "Vui lòng nhập tên chuyên ngành",
+  "function.specialization.modal.form.name.placeholder": "Nhập tên chuyên ngành",
+  "function.specialization.modal.form.description": "Mô tả",
+  "function.specialization.modal.form.description.placeholder": "Nhập mô tả",
+
+  "app.common.button.edit": "Chỉnh sửa",
+  "app.common.button.close": "Đóng",
+
+  "footer-copyright": "Bản quyền",
+  "footer-url": "https://example.com",
+  "footer-name": "Veterinary Clinic"
+}

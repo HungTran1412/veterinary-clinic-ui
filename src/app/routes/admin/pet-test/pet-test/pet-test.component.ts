@@ -1,14 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
 import { PetApiService } from '@/app/services/pet-api.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { PetItemComponent } from '../pet-test-item/pet-test-item.component';
 import { ColDef } from 'ag-grid-community';
-import { AgGridAngular } from 'ag-grid-angular';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzSpinModule } from 'ng-zorro-antd/spin';
-import { NzModalModule } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-pet-test',
@@ -21,7 +15,6 @@ export class PetTestComponent implements OnInit {
   loading = false;
   listOfData: any[] = [];
 
-  // Cấu hình cột cho AG Grid
   colDefs: ColDef[] = [
     { field: 'id', headerName: 'ID', sortable: true, filter: true, width: 100 },
     { field: 'code', headerName: 'Mã thú cưng', sortable: true, filter: true },
@@ -40,19 +33,14 @@ export class PetTestComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('PetTestComponent initialized');
     this.loadData();
-
     (window as any).editPet = (id: string) => this.openEdit(id);
   }
 
   loadData(): void {
     this.loading = true;
-    console.log('PetTestComponent.loadData() called');
-
     this.petApiService.getAll().subscribe({
       next: (res: any) => {
-        console.log('PetTestComponent received data:', res);
         this.loading = false;
         if (res && res.code === 200 && Array.isArray(res.data)) {
           this.listOfData = res.data;
@@ -65,8 +53,6 @@ export class PetTestComponent implements OnInit {
       },
       error: (err) => {
         this.loading = false;
-        console.error('PetTestComponent received error:', err);
-
         let msg = 'Có lỗi xảy ra khi gọi API';
         if (err.status === 0) {
           msg = 'Lỗi kết nối (Status 0). Vui lòng kiểm tra: Server đã bật chưa? CORS? SSL?';

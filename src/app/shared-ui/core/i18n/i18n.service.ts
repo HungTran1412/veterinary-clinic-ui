@@ -4,8 +4,6 @@ import ngEn from '@angular/common/locales/en';
 import ngVi from '@angular/common/locales/vi';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '@/app/environments/environments';
-import { SETTING_KEY_BUILD } from '@/app/utils';
 import { enUS as dfEn, vi as dfVi } from 'date-fns/locale';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { en_US as zorroEnUS, NzI18nService, vi_VN as zorroViVN } from 'ng-zorro-antd/i18n';
@@ -38,7 +36,7 @@ const LANGS: { [key: string]: LangConfigData } = {
   }
 };
 
-@Injectable() // Xóa providedIn: 'root'
+@Injectable({ providedIn: 'root' })
 export class I18NService {
   private _defaultLang = DEFAULT;
   private _currentLang = DEFAULT;

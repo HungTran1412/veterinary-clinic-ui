@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { LayoutModule } from '@/app/layout/layout.module';
+import { AggridCellRenderModule } from '@/app/shared/ag-grid/ag-grid-cell-render.module';
 
 // Ant Design Modules
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -9,16 +11,16 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
-import { NzMessageModule } from 'ng-zorro-antd/message';
-import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
-import { NzSpinModule } from 'ng-zorro-antd/spin';
-import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
 // AG Grid
-import { AgGridAngular } from 'ag-grid-angular';
+import { AgGridModule } from 'ag-grid-angular';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { PetTestComponent } from './pet-test/pet-test/pet-test.component';
@@ -26,7 +28,7 @@ import { PetItemComponent } from './pet-test/pet-test-item/pet-test-item.compone
 import { SpecializationItemComponent } from './specializations/specialization-item/specialization-item.component';
 import { SpecializationComponent } from './specializations/specialization/specialization.component';
 import { ProPageModule } from '@/app/layout/pro/shared/page/page.module';
-import { I18nPipe } from '@/app/layout/pro/i18n.pipe';
+
 @NgModule({
   declarations: [
     PetTestComponent,
@@ -39,6 +41,9 @@ import { I18nPipe } from '@/app/layout/pro/i18n.pipe';
     ReactiveFormsModule,
     FormsModule,
     AdminRoutingModule,
+    LayoutModule,
+    ProPageModule,
+    AggridCellRenderModule,
 
     // Ant Design
     NzButtonModule,
@@ -47,20 +52,16 @@ import { I18nPipe } from '@/app/layout/pro/i18n.pipe';
     NzFormModule,
     NzInputModule,
     NzInputNumberModule,
-    NzMessageModule,
-    NzPaginationModule,
+    NzSpinModule,
+    NzSwitchModule,
     NzCardModule,
     NzGridModule,
     NzBreadCrumbModule,
-    NzSpinModule,
-    NzSwitchModule,
+    NzPaginationModule,
+    NzDropDownModule,
 
     // AG Grid
-    AgGridAngular,
-
-    // Pro
-    ProPageModule,
-    I18nPipe
+    AgGridModule
   ]
 })
 export class AdminModule { }

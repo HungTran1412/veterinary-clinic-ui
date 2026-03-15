@@ -10,24 +10,9 @@ import {
   ViewChild
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzBadgeModule } from 'ng-zorro-antd/badge';
-import { LayoutProWidgetQuickChatStatusComponent } from './quick-chat-status.component';
 
 @Component({
   selector: 'layout-pro-widget-quick-chat',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    NzDropDownModule,
-    NzIconModule,
-    NzBadgeModule,
-    LayoutProWidgetQuickChatStatusComponent
-  ],
   templateUrl: './quick-chat.component.html',
   host: {
     '[class.alain-pro__header-item]': 'true',

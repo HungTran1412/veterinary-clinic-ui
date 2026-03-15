@@ -1,36 +1,14 @@
 import { Direction, Directionality } from '@angular/cdk/bidi';
-import { DOCUMENT, CommonModule } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, NgZone, OnDestroy, OnInit, Optional } from '@angular/core';
 import { I18NService } from '@/app/shared-ui/core/i18n/i18n.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject, takeUntil } from 'rxjs';
 import { BrandService } from '../pro.service';
-import { ProLayout, ProLayoutTheme, ProLayoutMenu, ProLayoutContentWidth } from '../pro.types';
-import { FormsModule } from '@angular/forms';
-import { NzDrawerModule } from 'ng-zorro-antd/drawer';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzSwitchModule } from 'ng-zorro-antd/switch';
-import { NzSelectModule } from 'ng-zorro-antd/select';
-import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
-import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { NzAlertModule } from 'ng-zorro-antd/alert';
-import { I18nPipe } from '../i18n.pipe';
+import { ProLayout } from '../pro.types';
 
 @Component({
   selector: 'pro-setting-drawer',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    NzDrawerModule,
-    NzIconModule,
-    NzSwitchModule,
-    NzSelectModule,
-    NzToolTipModule,
-    NzDividerModule,
-    NzAlertModule,
-    I18nPipe
-  ],
   templateUrl: './setting-drawer.component.html',
   preserveWhitespaces: false,
   host: {
